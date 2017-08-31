@@ -117,6 +117,7 @@ function minify {
         git checkout tags/$1 && git submodule update --recursive;
     fi;
     # Run the minifaction script
+    rm -rf ../web2py;
     python ./scripts/make_min_web2py.py ../web2py;
     if [ "$MINIFICATION_LEVEL" -ge "1" ]
     then
@@ -136,8 +137,6 @@ function git_add {
     #
     branch="web2py_$1$2"
     git checkout -b $branch;
-    # echo -e "===\n$web2py_rel_path\n===";
-    # ls -l $web2py_rel_path;
     git add $web2py_rel_path;
     git commit $web2py_rel_path -m "web2py $1";
 }
