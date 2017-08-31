@@ -139,6 +139,7 @@ function git_add {
     git checkout -b $branch;
     git add $web2py_rel_path;
     git commit $web2py_rel_path -m "web2py $1";
+    echo $branch;
 }
 
 function sub {
@@ -159,15 +160,15 @@ function sub {
 if [ ! -z $MINIFICATION_LEVEL ]
 then
     rtag=`minify $TAG`;
-    git_add $TAG "_mini";
+    branch=`git_add $TAG "_mini"`;
 else
     rtag=`sub $TAG`;
-    git_add $TAG;
+    branch=`git_add $TAG`;
 fi;
 
 if [ ! -z $UPSTREAM ]
 then
-    git remote add upstream $UPSTREAM && git push -u upstream master;
+    git remote add upstream $UPSTREAM && git push -u upstream $branch;
 fi;
 
 git status;

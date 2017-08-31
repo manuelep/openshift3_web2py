@@ -8,7 +8,7 @@ Use the [Gunicorn](http://gunicorn.org/) WSGI HTTP server to serve your applicat
 ### Basic information
 
 * The Gunicorn WSGI HTTP server is used to serve your application in the case that it is installed
-    - The easiest way to install gunicorn fixing desidered version is using the `requirements.txt`
+    - The easiest way to install gunicorn fixing desired version is using the `requirements.txt`
     - At the moment using `setup.py` strategy breaks installation raising [this exception](installing-gunicorn-using-setup.log):
 
         ```
@@ -18,9 +18,20 @@ Use the [Gunicorn](http://gunicorn.org/) WSGI HTTP server to serve your applicat
         SyntaxError: invalid syntax
         ```    
 
-* If a file named wsgi.py is present in your repository, it will be used by Gunicorn
-    as the entry point to your application
+* If a file named **wsgi.py** is present in your repository, it will be used by Gunicorn
+    as the entry point to your application.
 
+## File system structure
+
+```
++-- <this>
+|   +-- wsgi
+|   |   +-- web2py
+|   +-- setup.py
+|   +-- requirements.py
+|   +-- wsgi.py
+|   +-- ...
+```
 
 References
 ===
