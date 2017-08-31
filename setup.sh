@@ -1,8 +1,10 @@
 #!/bin/bash
 
-usage="$(basename "$0") [-h] [-l=<value>] [-u=<url>] [-t=<string>] [-m=<value>] [-c] -- A script that helps you to include the desidered web2py framework version.
+usage="$(basename "$0") [-h] [-l=<value>] [-u=<url>] [-c=<url>] [-t=<string>] [-m=<value>] [-c] -- A script that helps you to include the desidered web2py framework version.
 
-where:
+A url to a brand new git repository has to be passed as argument.
+
+Optional parameters:
     -h   Show this help text and exit.
     -l*  Set the script logging level accoddingly to RFC 5424;
          Allowed values: 0-7, default: 6.
@@ -11,6 +13,7 @@ where:
     -m   Include in the project a minified web2py framework;
          Allowed values: 0-1.
     -c   Remove framework cloned repository.
+    -r   A git repository url where to push updates.
 
     *    Options require passing a value
 ";
@@ -32,6 +35,9 @@ case $i in
     URL="${i#*=}";
     shift # past argument=value
     ;;
+    -o=*|--origin=*)
+    UPSTREAM="${i#*=}";
+    shift # past argument=value
     -t=*|--tag=*)
     TAG="${i#*=}";
     shift # past argument=value
@@ -50,7 +56,6 @@ case $i in
     shift
     ;;
     *)
-            # unknown option
     ;;
 esac
 done
@@ -124,9 +129,9 @@ function minify {
 
 function git_add {
     #
-    branch="web2py_$1_mini"
+    branch="web2py_$1$2"
     git checkout -b $branch
-    git add $web2py_rel_path;
+    git add web2py_rel_path;
     git commit wsgi -m "web2py $1";
     echo $branch;
 }
@@ -149,7 +154,7 @@ function sub {
 if [ ! -z $MINIFICATION_LEVEL ]
 then
     rtag=`minify $TAG`;
-    new_branch=`git_add $TAG`;
+    new_branch=`git_add $TAG "_mini"`;
     if [ $CLEAN ]
     then
         rm -rf $web2py_abs_path;
@@ -159,4 +164,9 @@ else
     new_branch=`git_add $TAG`;
 fi
 
-echo "Switched to branch '$new_branch'"
+if [ ! -z $UPSTREAM ]
+then
+    git remote add upstream $UPSTREAM && git push -u upstream master;
+fi
+
+git status;
