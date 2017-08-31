@@ -3,7 +3,7 @@
 import os
 import sys
 
-here = os.path.realpath(__file__)
+here = os.path.abspath(__file__)
 
 rel_path_to_web2py = os.path.join('wsgi', 'web2py')
 path_to_web2py = os.path.join(here, rel_path_to_web2py)
