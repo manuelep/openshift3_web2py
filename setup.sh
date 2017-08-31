@@ -38,6 +38,7 @@ case $i in
     -o=*|--origin=*)
     UPSTREAM="${i#*=}";
     shift # past argument=value
+    ;;
     -t=*|--tag=*)
     TAG="${i#*=}";
     shift # past argument=value
