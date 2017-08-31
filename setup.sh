@@ -105,6 +105,17 @@ cd $SCRIPTPATH;
 web2py_rel_path="wsgi/web2py"
 web2py_abs_path="${SCRIPTPATH}/$web2py_rel_path";
 
+function git_add {
+    #
+    branch="web2py_$1$2"
+    git checkout -b $branch;
+    git add $web2py_rel_path;
+    rm -- "$0";
+    .log 6 "Warning! Current script has been removed from new branch";
+    git commit $web2py_rel_path -m "web2py $1";
+    echo $branch;
+}
+
 function minify {
     #
     # Clone web2py repo
@@ -133,18 +144,8 @@ function minify {
     echo $mytag;
 };
 
-function git_add {
-    #
-    branch="web2py_$1$2"
-    git checkout -b $branch;
-    git add $web2py_rel_path;
-    git commit $web2py_rel_path -m "web2py $1";
-    echo $branch;
-}
-
 function sub {
     #
-    git checkout -b "web2py_$1"
     git submodule add $web2py_repo_url $web2py_rel_path;
     cd $web2py_abs_path;
     if [ -n ${1+x} ]
