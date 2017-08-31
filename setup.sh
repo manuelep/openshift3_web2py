@@ -134,7 +134,7 @@ function git_add {
 function sub {
     #
     git checkout -b "web2py_$1"
-    git submodule add $web2py_repo_url $web2py_abs_path;
+    git submodule add $web2py_repo_url $web2py_rel_path;
     cd $web2py_abs_path;
     if [ -n ${1+x} ]
     then
@@ -149,14 +149,14 @@ function sub {
 if [ ! -z $MINIFICATION_LEVEL ]
 then
     rtag=`minify $TAG`;
-    new_branch=git_add $TAG;
+    new_branch=`git_add $TAG`;
     if [ $CLEAN ]
     then
         rm -rf $web2py_abs_path;
     fi
 else
     rtag=`sub $TAG`;
-    new_branch=git_add $TAG;
+    new_branch=`git_add $TAG`;
 fi
 
-echo 'Switched to branch "$new_branch"'
+echo "Switched to branch '$new_branch'"
