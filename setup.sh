@@ -126,7 +126,7 @@ function git_add {
     #
     branch="web2py_$1_mini"
     git checkout -b $branch
-    git add ;
+    git add $web2py_rel_path;
     git commit wsgi -m "web2py $1";
     echo $branch;
 }
