@@ -72,7 +72,7 @@ function .log () {
   shift
   if [ ${__VERBOSE} -ge ${LEVEL} ]; then
     echo -e "[${LOG_LEVELS[$LEVEL]}] \t $@"
-  fi
+  fi;
 }
 
 .log $__VERBOSE "Logging level set to $__VERBOSE / 7 (i.e.: [${LOG_LEVELS[$__VERBOSE]}])"
@@ -88,8 +88,8 @@ then
     then
         .log 0 "Not supported minification level.";
         exit 1;
-    fi
-fi
+    fi;
+fi;
 
 .log 7 "MINIFICATION_LEVEL = $MINIFICATION_LEVEL";
 .log 7 "MINIFICATION_LABEL = $MINIFICATION_LABEL";
@@ -115,13 +115,17 @@ function minify {
     then
         # Checkout to the required tag
         git checkout tags/$1 && git submodule update --recursive;
-    fi
+    fi;
     # Run the minifaction script
     python ./scripts/make_min_web2py.py ../web2py;
     if [ "$MINIFICATION_LEVEL" -ge "1" ]
     then
         # Add the admin application
         rsync -av ./applications/admin "${web2py_abs_path}/applications/";
+    fi;
+    if [ "$CLEAN" = "true" ]
+    then
+        rm -rf $web2py_repo;
     fi
     mytag=`git describe --tags`;
     cd -;
@@ -131,12 +135,11 @@ function minify {
 function git_add {
     #
     branch="web2py_$1$2"
-    git stash;
-    git checkout -b $branch
+    git checkout -b $branch;
+    # echo -e "===\n$web2py_rel_path\n===";
+    # ls -l $web2py_rel_path;
     git add $web2py_rel_path;
-    git commit -am "web2py $1";
-    git stash apply;
-    echo $branch;
+    git commit $web2py_rel_path -m "web2py $1";
 }
 
 function sub {
@@ -148,7 +151,7 @@ function sub {
     then
         # Checkout to the required tag
         git checkout tags/$1;
-    fi
+    fi;
     mytag=`git describe --tags`;
     cd -;
     echo $mytag;
@@ -157,19 +160,15 @@ function sub {
 if [ ! -z $MINIFICATION_LEVEL ]
 then
     rtag=`minify $TAG`;
-    new_branch=`git_add $TAG "_mini"`;
-    if [ $CLEAN ]
-    then
-        rm -rf $web2py_abs_path;
-    fi
+    git_add $TAG "_mini";
 else
     rtag=`sub $TAG`;
-    new_branch=`git_add $TAG`;
-fi
+    git_add $TAG;
+fi;
 
 if [ ! -z $UPSTREAM ]
 then
     git remote add upstream $UPSTREAM && git push -u upstream master;
-fi
+fi;
 
 git status;
