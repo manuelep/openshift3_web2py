@@ -99,11 +99,6 @@ cd $SCRIPTPATH;
 web2py_rel_path="wsgi/web2py"
 web2py_abs_path="${SCRIPTPATH}/$web2py_rel_path";
 
-function switch {
-    #
-
-}
-
 function minify {
     #
     # Clone web2py repo
