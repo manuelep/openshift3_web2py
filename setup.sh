@@ -117,7 +117,7 @@ function minify {
         git checkout tags/$1 && git submodule update --recursive;
     fi
     # Run the minifaction script
-    python ./scripts/make_min_web2py.py $web2py_abs_path;
+    python ./scripts/make_min_web2py.py ../web2py;
     if [ "$MINIFICATION_LEVEL" -ge "1" ]
     then
         # Add the admin application
