@@ -1,0 +1,59 @@
+﻿Cloning "https://github.com/manuelep/openshift_v3_test.git" ...
+	Commit:	4b919f1f3c29a294a6411b98cd49cd4e0c323bb8 (test)
+	Author:	Manuele Pesenti <manuele@inventati.org>
+	Date:	Wed Aug 30 10:09:23 2017 +0200
+Pulling image "registry.access.redhat.com/rhscl/python-27-rhel7@sha256:8087e26e8c0b6e7df666ce33b8e3d7514258c6d7078e56bc557981cb09752e14" ...
+---> Installing application source ...
+---> Installing dependencies ...
+You are using pip version 7.1.0, however version 9.0.1 is available.
+You should consider upgrading via the 'pip install --upgrade pip' command.
+You must give at least one requirement to install (see "pip help install")
+---> Installing application ...
+running develop
+running egg_info
+creating web2pyhost.egg-info
+writing requirements to web2pyhost.egg-info/requires.txt
+writing web2pyhost.egg-info/PKG-INFO
+writing top-level names to web2pyhost.egg-info/top_level.txt
+writing dependency_links to web2pyhost.egg-info/dependency_links.txt
+writing manifest file 'web2pyhost.egg-info/SOURCES.txt'
+reading manifest file 'web2pyhost.egg-info/SOURCES.txt'
+writing manifest file 'web2pyhost.egg-info/SOURCES.txt'
+running build_ext
+Creating /opt/app-root/lib/python2.7/site-packages/web2pyhost.egg-link (link to .)
+Adding web2pyhost 0.1 to easy-install.pth file
+
+Installed /opt/app-root/src
+Processing dependencies for web2pyhost==0.1
+Searching for gunicorn
+Reading https://pypi.python.org/simple/gunicorn/
+Best match: gunicorn 19.7.1
+Downloading https://pypi.python.org/packages/30/3a/10bb213cede0cc4d13ac2263316c872a64bf4c819000c8ccd801f1d5f822/gunicorn-19.7.1.tar.gz#md5=174d3c3cd670a5be0404d84c484e590c
+Processing gunicorn-19.7.1.tar.gz
+Writing /tmp/easy_install-8vBe0z/gunicorn-19.7.1/setup.cfg
+Running gunicorn-19.7.1/setup.py -q bdist_egg --dist-dir /tmp/easy_install-8vBe0z/gunicorn-19.7.1/egg-dist-tmp-u0_HNn
+warning: no previously-included files matching '__pycache__' found under directory '*'
+warning: no previously-included files matching '*.py[co]' found under directory '*'
+  File "build/bdist.linux-x86_64/egg/gunicorn/workers/_gaiohttp.py", line 84
+    yield from self.wsgi.close()
+             ^
+SyntaxError: invalid syntax
+
+creating /opt/app-root/lib/python2.7/site-packages/gunicorn-19.7.1-py2.7.egg
+Extracting gunicorn-19.7.1-py2.7.egg to /opt/app-root/lib/python2.7/site-packages
+  File "/opt/app-root/lib/python2.7/site-packages/gunicorn-19.7.1-py2.7.egg/gunicorn/workers/_gaiohttp.py", line 84
+    yield from self.wsgi.close()
+             ^
+SyntaxError: invalid syntax
+
+Adding gunicorn 19.7.1 to easy-install.pth file
+Installing gunicorn script to /opt/app-root/bin
+Installing gunicorn_paster script to /opt/app-root/bin
+
+Installed /opt/app-root/lib/python2.7/site-packages/gunicorn-19.7.1-py2.7.egg
+Finished processing dependencies for web2pyhost==0.1
+
+Pushing image 172.30.118.67:5000/colouree/web2pyhost:latest ...
+Pushed 4/5 layers, 81% complete
+Pushed 5/5 layers, 100% complete
+Push successful
