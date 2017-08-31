@@ -146,7 +146,7 @@ function sub {
     echo $mytag;
 };
 
-if [ -n $MINIFICATION_LEVEL ]
+if [ ! -z $MINIFICATION_LEVEL ]
 then
     rtag=`minify $TAG`;
     new_branch=git_add $TAG;
@@ -159,4 +159,4 @@ else
     new_branch=git_add $TAG;
 fi
 
-echo 'Switched to branch "new_branch"'
+echo 'Switched to branch "$new_branch"'
