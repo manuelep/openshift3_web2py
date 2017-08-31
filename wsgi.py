@@ -15,5 +15,3 @@ from gluon.settings import global_settings
 from gluon.main import appfactory
 WEB2PY_LOG = os.path.join(here, 'log', 'web2py.log')
 application = appfactory(logfilename = WEB2PY_LOG)
-
-application = get_app()
