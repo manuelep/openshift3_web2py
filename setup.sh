@@ -109,10 +109,11 @@ function git_add {
     #
     branch="web2py_$1$2"
     git checkout -b $branch;
-    git add $web2py_rel_path;
+    git add $web2py_rel_path && git commit $web2py_rel_path -m "web2py $1";
+
     rm -- "$0";
-    .log 6 "Warning! Current script has been removed from new branch";
-    git commit $web2py_rel_path -m "web2py $1";
+    git commit $0 -m "script removed";
+
     echo $branch;
 }
 
