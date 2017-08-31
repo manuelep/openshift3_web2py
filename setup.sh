@@ -131,9 +131,11 @@ function minify {
 function git_add {
     #
     branch="web2py_$1$2"
+    git stash;
     git checkout -b $branch
     git add $web2py_rel_path;
-    git commit wsgi -m "web2py $1";
+    git commit -am "web2py $1";
+    git stash apply;
     echo $branch;
 }
 
