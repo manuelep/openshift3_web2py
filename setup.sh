@@ -131,6 +131,7 @@ function minify {
     # Run the minifaction script
     rm -rf ../web2py;
     python ./scripts/make_min_web2py.py ../web2py;
+    rsync -av ./site-packages "${web2py_abs_path}/";
     if [ "$MINIFICATION_LEVEL" -ge "1" ]
     then
         # Add the admin application
