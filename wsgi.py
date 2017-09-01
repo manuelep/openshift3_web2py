@@ -8,6 +8,8 @@ here = os.environ['HOME']
 rel_path_to_web2py = os.path.join('wsgi', 'web2py')
 path_to_web2py = os.path.join(here, rel_path_to_web2py)
 
+os.environ['web2py_path'] = path_to_web2py
+
 sys.path.append(path_to_web2py)
 sys.path.append(os.path.join(path_to_web2py, 'gluon'))
 
